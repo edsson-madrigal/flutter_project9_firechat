@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/screens/login_screen.dart';
@@ -10,7 +10,24 @@ class WelcomeScreen extends StatefulWidget {
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this, // ticker
+    );
+
+    controller.forward();
+    controller.addListener(() {
+      print(controller.value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
