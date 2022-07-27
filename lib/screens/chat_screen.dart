@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/constants.dart';
 
 class ChatScreen extends StatefulWidget {
+  static String id = 'chat_screen';
+
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
