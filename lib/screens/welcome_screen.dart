@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_print
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/screens/login_screen.dart';
 import 'package:flutter_project9_firechat/screens/registration_screen.dart';
@@ -67,12 +68,23 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                Text(
-                  'Flash Chat',
+                DefaultTextStyle(
                   style: TextStyle(
-                      fontSize: 45.0,
-                      fontWeight: FontWeight.w900,
-                      color: Color.fromARGB(255, 87, 87, 87)),
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.w900,
+                    color: Color.fromARGB(255, 87, 87, 87),
+                  ),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Flash Chat',
+                        speed: Duration(milliseconds: 200),
+                      ),
+                    ],
+                    onTap: () {
+                      print("Tap Event");
+                    },
+                  ),
                 ),
               ],
             ),
