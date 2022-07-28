@@ -29,6 +29,13 @@
             {
               "client_id": "331563669835-plqsdfu14q920jueft46miihco8afatf.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "331563669835-e5tj5itlcca2osnq1be0kkge8u07cmhg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterProject9Firechat"
+              }
             }
           ]
         }
