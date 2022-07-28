@@ -1,12 +1,20 @@
-// ignore_for_file: prefer_const_constructors, unused_import, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/screens/welcome_screen.dart';
 import 'package:flutter_project9_firechat/screens/login_screen.dart';
 import 'package:flutter_project9_firechat/screens/registration_screen.dart';
 import 'package:flutter_project9_firechat/screens/chat_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(FlashChat());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(FlashChat());
+}
 
 class FlashChat extends StatelessWidget {
   @override
