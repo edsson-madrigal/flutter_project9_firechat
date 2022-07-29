@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextField(
               textAlign: TextAlign.center,
               onChanged: (value) {
-                password = password;
+                password = value;
                 //Do something with the user input.
               },
               decoration: kTextFieldDecoration.copyWith(
