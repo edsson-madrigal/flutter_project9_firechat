@@ -20,7 +20,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCurrentUser();
   }
@@ -30,6 +29,13 @@ class _ChatScreenState extends State<ChatScreen> {
     if (user != null) {
       loggedUser = user;
       print(loggedUser.email);
+    }
+  }
+
+  void getMessages() async {
+    final messages = await _firestore.collection('messages').get();
+    for (var message in messages.docs) {
+      print(message);
     }
   }
 
