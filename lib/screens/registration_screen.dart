@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/components/rounded_button.dart';
 import 'package:flutter_project9_firechat/constants.dart';
+import 'package:flutter_project9_firechat/screens/chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -70,11 +71,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 try {
                   final user = await _auth.createUserWithEmailAndPassword(
                       email: email, password: password);
+                  if (user != null) {
+                    if (!mounted) return;
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  }
                 } catch (e) {
                   print(e);
                 }
-                print(email);
-                print(password);
               }),
             ),
           ],
