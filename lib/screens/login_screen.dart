@@ -51,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               textAlign: TextAlign.center,
+              obscureText: true,
               onChanged: (value) {
                 password = value;
                 //Do something with the user input.
