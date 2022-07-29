@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/constants.dart';
@@ -12,8 +13,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late User loggedUser;
+  late String messageText;
 
   @override
   void initState() {
@@ -60,17 +63,22 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
+                        messageText = value;
                         //Do something with the user input.
                       },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  ElevatedButton(
+                  TextButton(
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.transparent),
                     ),
                     onPressed: () {
+                      _firestore.collection('messages').add({
+                        'text': messageText,
+                        'sender': loggedUser.email,
+                      });
                       //Implement send functionality.
                     },
                     child: Text(
