@@ -88,8 +88,11 @@ class _ChatScreenState extends State<ChatScreen> {
                       style: TextStyle(color: Colors.black));
                   messageWidgets.add(messageWidget);
                 }
-                return Column(
-                  children: messageWidgets,
+                return Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                    children: messageWidgets,
+                  ),
                 );
               },
             ),
