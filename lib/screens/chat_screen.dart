@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, avoid_print, must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,7 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
             StreamBuilder<QuerySnapshot>(
               stream: _firestore.collection('messages').snapshots(),
               builder: (context, snapshot) {
-                List<Text> messageWidgets = [];
+                List<MessageBubble> messageBubbles = [];
                 if (!snapshot.hasData) {
                   return Center(
                     child: CircularProgressIndicator(
@@ -84,14 +84,18 @@ class _ChatScreenState extends State<ChatScreen> {
                 for (var message in messages) {
                   final messageText = message.get('text');
                   final messageSender = message.get('sender');
-                  final messageWidget = Text('$messageText from $messageSender',
-                      style: TextStyle(color: Colors.black));
-                  messageWidgets.add(messageWidget);
+                  final messageBubble = MessageBubble(
+                    messageSender: messageSender,
+                    messageText: messageText,
+                  );
+                  messageBubbles.add(messageBubble);
+
                 }
                 return Expanded(
                   child: ListView(
-                    padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-                    children: messageWidgets,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                    children: messageBubbles,
                   ),
                 );
               },
@@ -134,5 +138,20 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  late String messageText;
+  late String messageSender;
+
+  MessageBubble({required this.messageSender, required this.messageText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        color: Colors.lightBlueAccent,
+        child: Text('$messageText from $messageSender',
+            style: TextStyle(color: Colors.black)));
   }
 }
