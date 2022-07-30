@@ -89,7 +89,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     messageText: messageText,
                   );
                   messageBubbles.add(messageBubble);
-
                 }
                 return Expanded(
                   child: ListView(
@@ -149,9 +148,36 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        color: Colors.lightBlueAccent,
-        child: Text('$messageText from $messageSender',
-            style: TextStyle(color: Colors.black)));
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(messageSender,
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: 12.0,
+              )),
+          Material(
+            borderRadius: BorderRadius.circular(30.0),
+            elevation: 5.0,
+            color: Colors.lightBlueAccent,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 10.0,
+                horizontal: 20.0,
+              ),
+              child: Text(
+                messageText,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
