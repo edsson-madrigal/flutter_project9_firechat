@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project9_firechat/constants.dart';
 
-
 final _firestore = FirebaseFirestore.instance;
 
 class ChatScreen extends StatefulWidget {
@@ -16,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   late User loggedUser;
   late String messageText;
@@ -79,6 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: messageTextController,
                       onChanged: (value) {
                         messageText = value;
                         //Do something with the user input.
@@ -92,6 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           MaterialStateProperty.all(Colors.transparent),
                     ),
                     onPressed: () {
+                      messageTextController.clear();
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedUser.email,
