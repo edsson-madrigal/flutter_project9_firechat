@@ -198,3 +198,6 @@ class MessageBubble extends StatelessWidget {
     );
   }
 }
+
+// database rules, make sure only auth people has acccess 
+// https://firebase.google.com/docs/firestore/security/get-started
